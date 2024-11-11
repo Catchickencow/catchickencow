@@ -23,10 +23,32 @@
   </style>
 </head>
 <body>
-  <p>If you see this text, the video may not be loading correctly.</p>
-  <video autoplay loop controls>
+  <video id="rickroll-video" autoplay loop muted playsinline>
     <source src="rickroll.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
+
+  <script>
+    const video = document.getElementById('rickroll-video');
+
+    // Unmute and attempt fullscreen after a short delay
+    video.addEventListener('loadeddata', () => {
+      video.muted = false; // Attempt to unmute
+
+      // Try to request fullscreen when video is ready
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    });
+
+    // Start playback programmatically
+    video.play().catch(error => {
+      console.log('Autoplay with sound blocked by browser policies:', error);
+    });
+  </script>
 </body>
 </html>
