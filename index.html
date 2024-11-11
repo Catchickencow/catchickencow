@@ -22,25 +22,9 @@
   </style>
 </head>
 <body>
-  <video id="rickroll-video" autoplay loop>
+  <video autoplay loop controls>
     <source src="Rick roll.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
-
-  <script>
-    // Select the video element
-    const video = document.getElementById('rickroll-video');
-
-    // Request fullscreen and play the video automatically
-    video.addEventListener('play', () => {
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) { // Safari compatibility
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) { // IE compatibility
-        video.msRequestFullscreen();
-      }
-    });
-  </script>
 </body>
 </html>
