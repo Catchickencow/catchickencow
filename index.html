@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <head>
   <title>Rick Roll</title>
   <style>
@@ -13,18 +11,13 @@
       overflow: hidden;
     }
 
-    video {
+    iframe {
       width: 100%;
-      height: auto;
-      max-height: 100vh;
-      object-fit: cover;
+      height: 100vh;
     }
   </style>
 </head>
 <body>
-  <video autoplay loop muted>
-    <source src="Rick roll.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </body>
 </html>
