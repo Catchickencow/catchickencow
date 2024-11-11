@@ -1,55 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Rick Roll</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      color: white;
-    }
-
-    video {
-      width: 100%;
-      height: auto;
-      max-height: 100vh;
-      object-fit: cover;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick Roll</title>
 </head>
 <body>
-  <p>If you see this text, the video may not be loading correctly.</p>
-  <video id="rickroll-video" autoplay loop muted playsinline>
-    <source src="rickroll.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-
-  <script>
-    const video = document.getElementById('rickroll-video');
-
-    // Attempt to unmute and fullscreen on play
-    video.addEventListener('loadeddata', () => {
-      video.muted = false; // Try to unmute on load
-
-      // Request fullscreen
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) { // Safari compatibility
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) { // IE compatibility
-        video.msRequestFullscreen();
-      }
-    });
-
-    // Attempt programmatic play to ensure autoplay with sound
-    video.play().catch(error => {
-      console.log('Autoplay with sound blocked by browser policies:', error);
-    });
-  </script>
+    <video autoplay loop muted>
+        <source src="Rick roll.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 </body>
 </html>
