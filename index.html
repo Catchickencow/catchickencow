@@ -42,7 +42,7 @@
     </audio>
 
     <!-- Optional: Message to prompt user interaction -->
-    <div id="tap-message" style="display: none;">Tap to unmute</div>
+    <div id="tap-message" style="display: none;">Tap to unmute and play audio</div>
 
     <script>
         // JavaScript to handle autoplay with sound restrictions
@@ -60,7 +60,7 @@
                 document.body.addEventListener('click', () => {
                     video.muted = false; // Unmute the video
                     video.play();
-                    audio.play(); // Start audio playback as well
+                    audio.play().catch(audioError => console.error("Audio playback prevented:", audioError)); // Start audio playback
                     tapMessage.style.display = 'none'; // Hide the message after user interacts
                 }, { once: true });
             });
