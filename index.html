@@ -3,51 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Rick Rolled</title>
+    <title>Enter Site</title>
     <style>
-        /* Make the background black and center the video */
         body {
             background-color: black;
-            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
+            color: white;
+            font-family: Arial, sans-serif;
         }
-        video {
-            max-width: 100%;
-            max-height: 100%;
+        button {
+            font-size: 1.5em;
+            padding: 10px 20px;
         }
     </style>
 </head>
 <body>
-    <!-- Video element with autoplay, loop, and initially muted attributes -->
-    <video id="rickroll-video" autoplay loop playsinline>
-        <source src="Rick%20roll.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Audio element for MP3 that will play when unmuted -->
-    <audio id="background-audio" loop>
-        <source src="Rick%20roll.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+    <button onclick="enterSite()">Enter Site</button>
 
     <script>
-        // Attempt to start audio without user interaction
-        window.addEventListener('load', () => {
-            const audio = document.getElementById('background-audio');
-            const video = document.getElementById('rickroll-video');
-
-            // Attempt to play audio and video together
-            video.play();
-            audio.play().catch(() => {
-                // If autoplay is restricted, re-mute the video for fallback
-                video.muted = true;
-                video.play();
-            });
-        });
+        function enterSite() {
+            window.location.href = 'index.html';
+        }
     </script>
 </body>
 </html>
