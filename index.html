@@ -19,49 +19,26 @@
             max-width: 100%;
             max-height: 100%;
         }
-        /* Optional: style for the message */
-        #tap-message {
-            color: white;
-            font-size: 1.5em;
-            position: absolute;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
-    <!-- Video element -->
+    <!-- Video element with audio embedded -->
     <video id="rickroll-video" autoplay loop playsinline>
-        <source src="Rick%20roll.mp4" type="video/mp4">
+        <source src="Rick_roll_with_audio.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Audio element (hidden initially) -->
-    <audio id="rickroll-audio" loop>
-        <source src="Rick%20roll.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- Optional: Message to prompt user interaction -->
-    <div id="tap-message" style="display: none;">Tap to unmute and play audio</div>
-
     <script>
-        // JavaScript to handle autoplay with sound restrictions
+        // Ensure video playback starts as soon as possible with sound
         window.addEventListener('load', () => {
             const video = document.getElementById('rickroll-video');
-            const audio = document.getElementById('rickroll-audio');
-            const tapMessage = document.getElementById('tap-message');
-            
-            video.muted = true; // Start video muted for autoplay compatibility
+            video.muted = true; // Initially mute to allow autoplay
             video.play().catch(error => {
-                console.error("Autoplay with sound prevented:", error);
-                tapMessage.style.display = 'block'; // Show message if autoplay is blocked
-
+                console.error("Autoplay prevented:", error);
                 // Listen for a click to start playback with sound
                 document.body.addEventListener('click', () => {
                     video.muted = false; // Unmute the video
                     video.play();
-                    audio.play().catch(audioError => console.error("Audio playback prevented:", audioError)); // Start audio playback
-                    tapMessage.style.display = 'none'; // Hide the message after user interacts
                 }, { once: true });
             });
         });
