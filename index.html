@@ -29,11 +29,17 @@
     </style>
 </head>
 <body>
-    <!-- Video element without the muted attribute -->
+    <!-- Video element -->
     <video id="rickroll-video" autoplay loop playsinline>
         <source src="Rick%20roll.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
+
+    <!-- Audio element (hidden initially) -->
+    <audio id="rickroll-audio" loop>
+        <source src="Rick%20roll.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
 
     <!-- Optional: Message to prompt user interaction -->
     <div id="tap-message" style="display: none;">Tap to unmute</div>
@@ -42,9 +48,10 @@
         // JavaScript to handle autoplay with sound restrictions
         window.addEventListener('load', () => {
             const video = document.getElementById('rickroll-video');
+            const audio = document.getElementById('rickroll-audio');
             const tapMessage = document.getElementById('tap-message');
             
-            video.muted = true; // Start muted to comply with autoplay policies
+            video.muted = true; // Start video muted for autoplay compatibility
             video.play().catch(error => {
                 console.error("Autoplay with sound prevented:", error);
                 tapMessage.style.display = 'block'; // Show message if autoplay is blocked
@@ -53,6 +60,7 @@
                 document.body.addEventListener('click', () => {
                     video.muted = false; // Unmute the video
                     video.play();
+                    audio.play(); // Start audio playback as well
                     tapMessage.style.display = 'none'; // Hide the message after user interacts
                 }, { once: true });
             });
