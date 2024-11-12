@@ -29,15 +29,15 @@
     </style>
 </head>
 <body>
-    <!-- Silent video element -->
+    <!-- Video element (plays muted on load) -->
     <video id="rickroll-video" autoplay loop playsinline muted>
-        <source src="Rick_roll_no_audio_reencoded.mp4" type="video/mp4">
+        <source src="Rick%20roll.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Audio element -->
+    <!-- Audio element (only plays on click) -->
     <audio id="rickroll-audio" loop>
-        <source src="Rick roll.mp3" type="audio/mp3">
+        <source src="Rick%20roll.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
@@ -45,25 +45,24 @@
     <div id="tap-message" style="display: none;">Tap to start audio</div>
 
     <script>
-        // JavaScript to handle video autoplay and audio sync on tap
         window.addEventListener('load', () => {
             const video = document.getElementById('rickroll-video');
             const audio = document.getElementById('rickroll-audio');
             const tapMessage = document.getElementById('tap-message');
 
-            // Start video muted by default
+            // Try to play the video (muted)
             video.play().catch(error => {
                 console.error("Video autoplay prevented:", error);
-                tapMessage.style.display = 'block'; // Show message if autoplay is blocked
+                tapMessage.style.display = 'block';
             });
 
-            // Listen for a click to start audio playback
-            video.addEventListener('click', () => {
+            // Add event listener for click to start audio playback only
+            document.body.addEventListener('click', () => {
                 if (audio.paused) {
                     audio.play().catch(audioError => console.error("Audio playback prevented:", audioError));
-                    tapMessage.style.display = 'none'; // Hide message after interaction
+                    tapMessage.style.display = 'none';
                 }
-            });
+            }, { once: true });
         });
     </script>
 </body>
