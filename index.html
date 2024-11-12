@@ -24,19 +24,10 @@
     </style>
 </head>
 <body>
-    <!-- Use the updated file name without spaces -->
-    <video id="myVideo" autoplay loop playsinline>
-        <source src="rick_roll.mp4" type="video/mp4">
+    <!-- Embed your local MP4 file with autoplay, loop, and muted attributes -->
+    <video autoplay loop muted>
+        <source src="Rick roll.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-
-    <script>
-        // Attempt to play the video with sound on page load
-        const video = document.getElementById('myVideo');
-        video.muted = false;
-        video.play().catch(error => {
-            console.log('Autoplay with sound may be blocked by the browser.');
-        });
-    </script>
 </body>
 </html>
