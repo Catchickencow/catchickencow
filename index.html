@@ -22,30 +22,20 @@
     </style>
 </head>
 <body>
-    <!-- Video element with autoplay, loop, and muted attributes -->
-    <video id="rickroll-video" autoplay loop muted playsinline>
+    <!-- Video element without the muted attribute -->
+    <video id="rickroll-video" autoplay loop playsinline>
         <source src="Rick%20roll.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Audio element to play the MP3 file in the background -->
-    <audio id="rickroll-audio" loop>
-        <source src="Rick%20roll.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
     <script>
-        // JavaScript to attempt playing the audio on page load
+        // JavaScript to force unmute and play the video on load
         window.addEventListener('load', () => {
-            const audio = document.getElementById('rickroll-audio');
-            audio.play().catch(error => {
-                console.error("Autoplay prevented:", error);
-                // If autoplay fails, retry when user interacts
+            const video = document.getElementById('rickroll-video');
+            video.muted = false; // Ensure video is unmuted
+            video.play().catch(error => {
+                console.error("Autoplay with sound prevented:", error);
+                // If autoplay with sound is blocked, listen for a click to start playback
                 document.body.addEventListener('click', () => {
-                    audio.play();
-                }, { once: true });
-            });
-        });
-    </script>
-</body>
-</html>
+                    video.play();
+  
