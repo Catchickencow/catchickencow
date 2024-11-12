@@ -51,6 +51,8 @@
             const audio = document.getElementById('rickroll-audio');
             const tapMessage = document.getElementById('tap-message');
 
+            // Start video muted by default
+            video.muted = true;
             video.play().catch(error => {
                 console.error("Video autoplay prevented:", error);
                 tapMessage.style.display = 'block'; // Show message if autoplay is blocked
@@ -60,7 +62,6 @@
             video.addEventListener('click', () => {
                 if (audio.paused) {
                     audio.play().catch(audioError => console.error("Audio playback prevented:", audioError));
-                    video.muted = false; // Unmute the video if needed
                     tapMessage.style.display = 'none'; // Hide message after interaction
                 }
             });
