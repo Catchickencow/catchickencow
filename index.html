@@ -50,23 +50,23 @@
             const audio = document.getElementById('rickroll-audio');
             const tapMessage = document.getElementById('tap-message');
 
-            // Try to play the video (muted)
+            // Attempt to play both video and audio muted to sync
             video.play().catch(error => {
                 console.error("Video autoplay prevented:", error);
-                tapMessage.style.display = 'block';
+                tapMessage.style.display = 'block'; // Show message if autoplay is blocked
             });
 
-            // Try to play audio muted for sync
-            audio.play().catch(error => {
+            audio.play().then(() => {
+                // If the audio plays muted successfully, show message to unmute
+                tapMessage.style.display = 'block';
+            }).catch(error => {
                 console.error("Audio autoplay prevented:", error);
             });
 
-            // Add event listener for click to unmute audio
+            // Add event listener for click to unmute audio only
             document.body.addEventListener('click', () => {
-                if (audio.muted) {
-                    audio.muted = false; // Unmute the audio
-                    tapMessage.style.display = 'none'; // Hide message after interaction
-                }
+                audio.muted = false; // Unmute the audio on click
+                tapMessage.style.display = 'none'; // Hide message after interaction
             }, { once: true });
         });
     </script>
