@@ -42,14 +42,14 @@
         Your browser does not support the video tag.
     </video>
 
-    <!-- Audio element (will be unmuted on click) -->
-    <audio id="rickroll-audio" loop>
+    <!-- Audio element (starts muted and is unmuted on click) -->
+    <audio id="rickroll-audio" autoplay loop muted>
         <source src="Rick%20roll.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
     <!-- Message to prompt user interaction -->
-    <div id="tap-message" style="display: none;">Tap to unmute audio</div>
+    <div id="tap-message" style="display: block;">Tap to unmute audio</div>
 
     <script>
         window.addEventListener('load', () => {
@@ -57,16 +57,13 @@
             const audio = document.getElementById('rickroll-audio');
             const tapMessage = document.getElementById('tap-message');
 
-            // Try to play video and handle any autoplay restrictions
+            // Attempt to play video and audio muted to sync them
             video.play().catch(error => {
                 console.error("Video autoplay prevented:", error);
                 tapMessage.style.display = 'block'; // Show message if autoplay is blocked
             });
 
-            // Try to play audio muted initially, if it fails, show tap message
-            audio.play().then(() => {
-                tapMessage.style.display = 'block'; // Show message to prompt unmuting
-            }).catch(error => {
+            audio.play().catch(error => {
                 console.error("Audio autoplay prevented:", error);
             });
 
@@ -74,7 +71,6 @@
             document.body.addEventListener('click', () => {
                 audio.muted = false; // Unmute the audio on click
                 tapMessage.style.display = 'none'; // Hide message after interaction
-                audio.play(); // Start audio playback
             }, { once: true });
         });
 
