@@ -35,8 +35,8 @@
         Your browser does not support the video tag.
     </video>
 
-    <!-- Audio element (starts muted and is unmuted on click) -->
-    <audio id="rickroll-audio" autoplay loop muted>
+    <!-- Audio element (starts paused and is played on click to ensure sync) -->
+    <audio id="rickroll-audio" loop>
         <source src="Rick%20roll.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
@@ -46,14 +46,14 @@
             const video = document.getElementById('rickroll-video');
             const audio = document.getElementById('rickroll-audio');
 
-            // Attempt to play video and audio muted to sync them
+            // Start video autoplay with muted audio to avoid sync issues
             video.play().catch(error => console.error("Video autoplay prevented:", error));
-            audio.play().catch(error => console.error("Audio autoplay prevented:", error));
 
-            // Add event listener for click to unmute audio only
+            // Set audio to play when the user clicks/taps, ensuring sync with the video
             document.body.addEventListener('click', () => {
-                if (audio.muted) {
-                    audio.muted = false; // Unmute the audio on click
+                if (audio.paused) {
+                    audio.currentTime = video.currentTime; // Sync audio with video
+                    audio.play(); // Play audio in sync
                 }
             }, { once: true });
         });
