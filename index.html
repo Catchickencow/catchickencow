@@ -26,13 +26,6 @@
             max-width: none;
             max-height: none;
         }
-        /* Style for the message */
-        #tap-message {
-            color: white;
-            font-size: 1.5em;
-            position: absolute;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -48,29 +41,20 @@
         Your browser does not support the audio element.
     </audio>
 
-    <!-- Message to prompt user interaction -->
-    <div id="tap-message" style="display: block;">Tap to unmute audio</div>
-
     <script>
         window.addEventListener('load', () => {
             const video = document.getElementById('rickroll-video');
             const audio = document.getElementById('rickroll-audio');
-            const tapMessage = document.getElementById('tap-message');
 
             // Attempt to play video and audio muted to sync them
-            video.play().catch(error => {
-                console.error("Video autoplay prevented:", error);
-                tapMessage.style.display = 'block'; // Show message if autoplay is blocked
-            });
-
-            audio.play().catch(error => {
-                console.error("Audio autoplay prevented:", error);
-            });
+            video.play().catch(error => console.error("Video autoplay prevented:", error));
+            audio.play().catch(error => console.error("Audio autoplay prevented:", error));
 
             // Add event listener for click to unmute audio only
             document.body.addEventListener('click', () => {
-                audio.muted = false; // Unmute the audio on click
-                tapMessage.style.display = 'none'; // Hide message after interaction
+                if (audio.muted) {
+                    audio.muted = false; // Unmute the audio on click
+                }
             }, { once: true });
         });
 
