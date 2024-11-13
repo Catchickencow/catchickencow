@@ -19,7 +19,7 @@
             max-width: 100%;
             max-height: 100%;
         }
-        /* Optional: style for the message */
+        /* Style for the message */
         #tap-message {
             color: white;
             font-size: 1.5em;
@@ -35,13 +35,13 @@
         Your browser does not support the video tag.
     </video>
 
-    <!-- Audio element (plays muted and unmuted on click to sync) -->
-    <audio id="rickroll-audio" autoplay loop muted>
+    <!-- Audio element (will be unmuted on click) -->
+    <audio id="rickroll-audio" loop>
         <source src="Rick%20roll.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- Optional: Message to prompt user interaction -->
+    <!-- Message to prompt user interaction -->
     <div id="tap-message" style="display: none;">Tap to unmute audio</div>
 
     <script>
@@ -50,15 +50,15 @@
             const audio = document.getElementById('rickroll-audio');
             const tapMessage = document.getElementById('tap-message');
 
-            // Attempt to play both video and audio muted to sync
+            // Try to play video and handle any autoplay restrictions
             video.play().catch(error => {
                 console.error("Video autoplay prevented:", error);
                 tapMessage.style.display = 'block'; // Show message if autoplay is blocked
             });
 
+            // Try to play audio muted initially, if it fails, show tap message
             audio.play().then(() => {
-                // If the audio plays muted successfully, show message to unmute
-                tapMessage.style.display = 'block';
+                tapMessage.style.display = 'block'; // Show message to prompt unmuting
             }).catch(error => {
                 console.error("Audio autoplay prevented:", error);
             });
@@ -67,6 +67,7 @@
             document.body.addEventListener('click', () => {
                 audio.muted = false; // Unmute the audio on click
                 tapMessage.style.display = 'none'; // Hide message after interaction
+                audio.play(); // Start audio playback
             }, { once: true });
         });
     </script>
