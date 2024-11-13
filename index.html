@@ -80,12 +80,27 @@
         });
 
         // Adjust video size on screen rotation
-        window.addEventListener('resize', () => {
+        function adjustVideoSize() {
             const video = document.getElementById('rickroll-video');
-            video.style.width = window.innerWidth + 'px';
-            video.style.height = 'auto'; 
-            video.style.minHeight = window.innerHeight + 'px';
-        });
+            const isLandscape = window.innerWidth > window.innerHeight;
+
+            if (isLandscape) {
+                // Slightly zoom out in landscape mode for a better fit
+                video.style.width = '95vw'; 
+                video.style.height = 'auto'; 
+            } else {
+                // Full screen in portrait mode
+                video.style.width = '100vw';
+                video.style.height = 'auto'; 
+                video.style.minHeight = '100vh';
+            }
+        }
+
+        // Apply adjustments on resize (rotate)
+        window.addEventListener('resize', adjustVideoSize);
+
+        // Initial adjustment
+        adjustVideoSize();
     </script>
 </body>
 </html>
