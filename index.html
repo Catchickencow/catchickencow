@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Get Rick Rolled</title>
     <style>
         /* Make the background black and center the video */
@@ -20,9 +20,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            min-width: 100vw;  /* Extend to full viewport width */
-            min-height: 100vh; /* Extend to full viewport height */
-            object-fit: cover; /* Cover entire screen without distortion */
+            width: 100vw;
+            height: auto;
+            min-height: 100vh;
+            object-fit: cover;
+            max-width: none; /* Remove max width restriction */
+            max-height: none; /* Remove max height restriction */
         }
         /* Style for the message */
         #tap-message {
@@ -74,6 +77,14 @@
                 tapMessage.style.display = 'none'; // Hide message after interaction
                 audio.play(); // Start audio playback
             }, { once: true });
+        });
+
+        // Adjust video size on screen rotation
+        window.addEventListener('resize', () => {
+            const video = document.getElementById('rickroll-video');
+            video.style.width = window.innerWidth + 'px';
+            video.style.height = 'auto'; 
+            video.style.minHeight = window.innerHeight + 'px';
         });
     </script>
 </body>
