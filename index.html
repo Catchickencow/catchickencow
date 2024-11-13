@@ -21,11 +21,10 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 100vw;
-            height: auto;
-            min-height: 100vh;
+            height: 100vh;
             object-fit: cover;
-            max-width: none; /* Remove max width restriction */
-            max-height: none; /* Remove max height restriction */
+            max-width: none;
+            max-height: none;
         }
         /* Style for the message */
         #tap-message {
@@ -85,14 +84,15 @@
             const isLandscape = window.innerWidth > window.innerHeight;
 
             if (isLandscape) {
-                // Slightly zoom out in landscape mode for a better fit
-                video.style.width = '95vw'; 
-                video.style.height = 'auto'; 
-            } else {
-                // Full screen in portrait mode
+                // Fit the entire video within the screen in landscape, with black bars if necessary
+                video.style.objectFit = 'contain';
                 video.style.width = '100vw';
-                video.style.height = 'auto'; 
-                video.style.minHeight = '100vh';
+                video.style.height = '100vh';
+            } else {
+                // Full screen in portrait mode, zoomed in
+                video.style.objectFit = 'cover';
+                video.style.width = '100vw';
+                video.style.height = '100vh';
             }
         }
 
