@@ -9,16 +9,20 @@
         body {
             background-color: black;
             margin: 0;
+            overflow: hidden;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
         }
         video {
-            width: 100vw;  /* Full viewport width */
-            height: auto;  /* Maintain aspect ratio */
-            max-height: 100vh; /* Cap at full viewport height to prevent overflow */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100vw;  /* Extend to full viewport width */
+            min-height: 100vh; /* Extend to full viewport height */
+            object-fit: cover; /* Cover entire screen without distortion */
         }
         /* Style for the message */
         #tap-message {
